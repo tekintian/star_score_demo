@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>star score 星星评分演示</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="telephone=no" name="format-detection">
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<link media="all" href="images/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div id="wrap">
+
+<div class="content">
+  <div class="d3">
+    <div class="section-detailbox"> <a class="box pjroom" href="#"> <span class="box-flex gsbox">
+      <ul class="gs_starBg">
+        <li style="z-index: 0; display: list-item; width: 80%;"></li>
+      </ul>
+      <em class="gs">4.5分</em> </span> <span> 2人评价 </span> </a>
+    </div>
+  
+    <div class="col-title">
+      <section><span>我要评分</span></section>
+      <a data-type="recommend" class="cur" style="display:none;"></a> 
+    </div>
+    <div class="star">
+    	<div class="content"> 
+	   		<div id="starttwo" class="block clearfix">
+		        <div class="star_score" style="width: 300px;">
+		        </div>
+		        <p style="float: left;">您的评分：<span class="fenshu"></span> 分</p>
+	    	</div>
+	        <script type="text/javascript" src="images/startscore.js"></script> 
+	        <script>
+			    scoreFun($("#starttwo"),{
+			        fen_d:60,//每一个a的宽度
+			        ScoreGrade:5//a的个数 10或者
+			        })
+	    	</script> 
+      </div>
+    	<input value="" name="name" placeholder="姓名" class="input_name" type="text">
+  		<input value="" name="mobile" placeholder="手机" class="input_mobile" type="text">
+    	<textarea type="text" name="content" placeholder="请输入您的评价" class="form_content"></textarea>
+    	<a class="go" href="javascript:;" onclick="ajax_comment()">提交</a> 
+    </div>
+	<div class="section-detailbox comment-box" style="">
+	    <section class="title">
+	    	<h3 class="t"><i class="t2"></i>评价</h3>
+	    </section>
+	    <section class="title goods">
+	        <dl class="goods-txt">
+	            <dd>
+		            <div class="gs-gqul"> <span class="name">186***7613</span> <span class="l1"></span> <span class="date">2016-10-03 23:10:14</span>
+		              <ul class="gs_starBg">
+		                <li style="z-index: 0; display: list-item; width: 100%;"> </li>
+		              </ul>
+		            </div>
+	            
+		            <div class="txt">
+		              <p class="comment-text"> 服务态度很好</p>
+		              <p class="img"> </p>
+		            </div>
+	          	</dd>
+	            <dd>
+		            <div class="gs-gqul"> <span class="name">150***3322</span> <span class="l1"></span> <span class="date">2016-09-29 15:43:15</span>
+		              <ul class="gs_starBg">
+		                <li style="z-index: 0; display: list-item; width: 80%;"> </li>
+		              </ul>
+		            </div>
+	            
+		            <div class="txt">
+		              <p class="comment-text"> 事发地点时</p>
+		              <p class="img"> </p>
+		            </div>
+	          	</dd>
+	        </dl>
+	    </section>
+	</div>
+    <div class="section-detailbox comment-box" style="display: none;">
+	    <section class="title">
+	    	<h2 class="t"><i class="t2"></i>评价</h2>
+	    </section>
+	    <section class="title goods">
+	    	<dl class="goods-txt">
+	    	</dl>
+	    </section>
+    </div>
+  </div>
+</div>
+
+<script>			
+		function ajax_comment(){
+		          var name = $('input[name="name"]').val();
+		          var mobile = $('input[name="mobile"]').val();
+		          var content = $('#content').val();
+		          var fenshu = $('.fenshu').html();
+		          if(fenshu == ''){
+		              if(confirm('请确定是0分么?')){
+		              	
+		              }else{return false;}
+		              
+		          }
+		          if(name == ''){
+		              alert('姓名不能为空');
+		              return false;
+		          }
+		          if(mobile == ''){
+		              alert('电话不能为空');
+		              return false;
+		          }
+		          if(content ==''){
+		              alert('内容不能为空');
+		              return false;
+		          }
+		          $('input[name="pingfen"]').val(fenshu);
+		          $.post(
+		                'index.php?c=content&a=comment&id=168',
+		                $('#ajaxForm').serialize(),
+		                function(data){
+		                  alert(data);
+		                });
+		           alert('感谢您的评价!你的评分为'+ fenshu);
+		          
+		      }	
+	
+		</script>
+ </div>
+</body>
+</html>
